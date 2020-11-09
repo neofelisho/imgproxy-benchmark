@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  imgproxy:
+    image: darthsim/imgproxy
+    environment:
+      IMGPROXY_LOCAL_FILESYSTEM_ROOT: /images
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./images:/images
+
+  image-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
